@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+			<!-- Latest compiled and minified CSS from bootswatch-->
+		<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+			<!-- Latest compiled and minified JavaScript from Bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<title>
+			entry page
+		</title>
+
+	<!-- Load Chart.js library if there are values to plot -->
+		{% if dict_variables['caloric_history_values']!= None %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+		{% endif %}
+
+
+	</head>
+
+	<body>
+		<h1>{{dict_variables.get('user')}}</h1>
+		{% if dict_variables.get('display_entries') == True %}
+			<ul>
+				{% for entry in dict_variables.get('entries') %}
+					<li> FOOD: {{entry['food']}} </li>
+					<li> CAlORIC Value: {{ entry['calories']|string() }} </li>
+				{% endfor %}
+
+			</ul>
+				<p>Your total caloric consumption for today is {{ (dict_variables.get('consumption'))|string() }} </p>
+		{% endif %}
+
+		{% if dict_variables.get('display_message') != False %}
+		<p> {{dict_variables.get('message')}} <p>
+		{% endif %}
+
+		{{  dict_variables.get('caloric_history_values') }}
+		{{  dict_variables.get('caloric_history_dates') }}
+
+
+
+
+
+		{% if dict_variables.get('caloric_history_values') != None %}
+
+		Hit this if clause
+		<div class="container">
+			<canvas id="myChart"></canvas>
+			<script> 
+					var ctx = document.getElementById('myChart').getContext('2d');
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'bar',
+
+					    // The data for our dataset
+					    data: {
+					        labels: {{ dict_variables['caloric_history_dates']|safe }},
+					        datasets: [{
+					            label: "Past {{dict_variables.get('history_length')}} recorded days of caloric consumption ",
+					            backgroundColor: 'rgb(255, 99, 132)',
+					            borderColor: 'rgb(255, 99, 132)',
+					            data: {{ dict_variables['caloric_history_values']|safe }},
+					        }]
+					    },
+
+					    // Configuration options go here
+					    options: {}
+					});
+			 </script>
+		</div>
+		Hit the end of execution
+		{% endif %}
+
+		<form action="/entry_page" method="post">
+			<div class="form-group row">
+				<div class ="input_group col-xs-4">
+					<label for="entry_food_name">Food Item</label>
+					<input id="entry_food_name" type="text" name="food_item">
+				</div>
+				 <div class ="input_group col-xs-4" >
+			        <label for="entry_caloric_value">Calories</label>
+			        <input type="number" id="" name="caloric_value">
+			    </div>
+			    <div class="button">
+	  				<button type="submit">Add Entry to {{dict_variables.get('user')}}'s diet</button>
+				</div>
+			</div>
+
+		</form>
+
+
+	</body>
+
+
+
+
+</html>

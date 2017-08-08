@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+{% block head %}
+<head>
+	<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS from bootswatch-->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript from Bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+<!-- 	<link rel = "stylesheet" type = "text/css" href = "{{url_for('static',filename='style.css')}}" > 
+ --> 	{% block title %}
+	<title>layout</title>
+	{% endblock %}
+
+</head>
+{% endblock %}
+
+<body>
+	{% block navbar%}
+	<nav class="nav navbar-default" role="navigation">
+			<div class="col-sm-2">
+			</div>
+			<ul class="nav navbar-nav nav-pills">
+				<li><a href = "{{url_for('home')}}">Home</a></li>
+				<li><a href = "{{url_for('resume')}}">Resume</a></li>
+				<li><a href = "{{url_for('projects')}}"> Projects</a></li>
+				<li><a href = "{{url_for('blog')}}"> Blog</a></li>
+			</ul>
+	</nav> 
+	{% endblock %}
+		<div class="col-sm-2">
+		</div>
+		<div class ="col-sm-5">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<div class="col-sm-3">
+			<div class="col-sm-3">
+				<img src="/static/cropped_grad_linkedinphoto.jpg" alt="Me 'n cap 'n gown" width ="70px" height "100px">
+			</div>
+			<div class = "col-sm-6">Nick Saber<br><a href="mailto:nsaber@berkeley.edu"> Email me</a><br><a href="	https://github.com/Nick-Saber">Github</a> 
+			</div>
+			<div class="col-sm-3">
+			</div>
+		</div>
+			<div class="col-sm-2">
+		</div>
+</body>
+</html> 
