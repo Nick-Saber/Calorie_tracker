@@ -35,6 +35,11 @@ def login():
 
 	#Process Logging In
 	if request.method=='POST':
+		#If routed here from logging out
+		if request.form.get('login_type')=='Logout':
+			session['username']=None
+			dict_variables['user']=session['username']
+			return render_template('login.html',dict_variables=dict_variables)
 		#Account creation
 		if request.form.get('login_type')=='Create':
 			if (request.form.get('password1')==request.form.get('password2')) and (request.form.get('user_name')!= None):
@@ -51,13 +56,15 @@ def login():
 
 		#Logging in to an existing account
 		if request.form.get('login_type')=='Login':
+			#result is a tuple where the boolean value of the check is the first entry and
+			#the second entry is the associated error or success message
 			result= db_api.check_login(request.form.get('user_name_login'),request.form.get('login_password'))
 			if result[0]:
-				session['username']=request.form.get('user_name')
-				dict_variables['username']=session['username']
+				session['username']=request.form.get('user_name_login')
+				dict_variables['user']=session['username']
 				return render_template('entry_page.html',dict_variables=dict_variables)
 			else:
-				dict_variables['login_acc_err_message']=result[1]
+				dict_variables['login_acc_error_message']=result[1]
 				return render_template('login.html',dict_variables=dict_variables)
 
 
@@ -97,7 +104,7 @@ def entry_page():
 			#plot users past history data
 			history_data=db_api.get_past_x_days(dict_variables['user'],5)
 			dict_variables['caloric_history_values']=json.dumps(history_data[0])
-			dict_variables['caloric_history_dates']=json.dumps([entry.date().__str__() for entry in history_data[1]])
+			dict_variables['caloric_history_dates']=json.dumps([entry.__str__() for entry in history_data[1]])
 			dict_variables['history_length'] = len(history_data[0])
 
 

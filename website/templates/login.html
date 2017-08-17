@@ -22,7 +22,7 @@
 			<div class="container col-sm-4 offset-sm-4">
 				<h2> Need an account? </h2>
 					{% if dict_variables.get('create_acc_error_message') != None %}
-						<p> dict_variables.get('create_acc_error_message') </p>
+						<p> {{dict_variables.get('create_acc_error_message')}} </p>
 					{% endif %}
 				<form action="{{url_for('login')}}" method="post">
 
@@ -47,7 +47,7 @@
 			<div class="container col-sm-4 offset-sm-4">
 				<h2> Already have an account? </h2>
 				{% if dict_variables.get('login_acc_error_message') != None %}
-						<p> dict_variables.get('login_acc_error_message') </p>
+						<p> {{dict_variables.get('login_acc_error_message')}} </p>
 				{% endif %}
 				<form action="{{url_for('login')}}" method="post">
 

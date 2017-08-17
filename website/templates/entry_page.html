@@ -20,7 +20,14 @@
 	</head>
 
 	<body>
-		<h1>{{dict_variables.get('user')}}</h1>
+		<div class = "container">
+			<h1>{{dict_variables.get('user')}}</h1>
+			<form action="{{url_for('login')}}" method="post">
+				<div class="button">
+		  			<input type="submit" name='login_type' value='Logout'/>
+				</div>
+			</form>
+		</div>
 		{% if dict_variables.get('display_entries') == True %}
 			<ul>
 				{% for entry in dict_variables.get('entries') %}
