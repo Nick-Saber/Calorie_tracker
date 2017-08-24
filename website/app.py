@@ -77,10 +77,19 @@ def login():
 @app.route('/entry_page', methods=['GET','POST'] )
 def entry_page():
 	dict_variables={}
+	#always plot and display the users past 5 entries
+	if session.get('username') != None:
+		#plot users past history data
+		history_data=db_api.get_past_x_days(session.get('username'),5)
+		dict_variables['caloric_history_values']=json.dumps(history_data[0])
+		dict_variables['caloric_history_dates']=json.dumps([entry.__str__() for entry in history_data[1]])
+		dict_variables['history_length'] = len(history_data[0])
+
 	if request.method == 'GET':
 		if request.args.get('user_name') != None :
 			session['username']=request.args.get('user_name')
 			dict_variables['user']=session.get('username')
+
 			return  render_template('entry_page.html',dict_variables=dict_variables)
 		elif session.get('username') != None:
 			dict_variables['user']=session.get('username')
@@ -100,13 +109,6 @@ def entry_page():
 
 			#list out and display users past entries and related info
 			dict_variables['consumption']=db_api.get_todays_entries(dict_variables['user'])
-
-			#plot users past history data
-			history_data=db_api.get_past_x_days(dict_variables['user'],5)
-			dict_variables['caloric_history_values']=json.dumps(history_data[0])
-			dict_variables['caloric_history_dates']=json.dumps([entry.__str__() for entry in history_data[1]])
-			dict_variables['history_length'] = len(history_data[0])
-
 
 			return render_template('entry_page.html', dict_variables=dict_variables)
 		else:

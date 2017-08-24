@@ -19,57 +19,59 @@
 	{% if dict_variables.get('user') == None %}
 
 		<div class ="row">
-			<div class="container col-sm-4 offset-sm-4">
-				<h2> Need an account? </h2>
-					{% if dict_variables.get('create_acc_error_message') != None %}
-						<p> {{dict_variables.get('create_acc_error_message')}} </p>
-					{% endif %}
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-4 offset-sm-4">
+
+				<h2 class="text-center"> Need an account? </h2>
+				{% if dict_variables.get('create_acc_error_message') != None %}
+					<p> {{dict_variables.get('create_acc_error_message')}} </p>
+				{% endif %}
+
 				<form action="{{url_for('login')}}" method="post">
 
-					<div class='input-group'>
-						<label for="username">Who are you¿</label>
-						<input id="username" type="text" name="user_name">
-					</div>
-					<div class='input-group'>
-						<label for="password1">Enter a Password</label>
-						<input id="password1" type="text" name="password1">
-					</div>
-					<div class='input-group'>
-						<label for="password2">Re-enter Password</label>
-						<input id="password2" type="text" name="password2">
-					</div>
-					<div class="button">
+
+					<input class="form-control input-sm chat-input" id="username" type="text" name="user_name" placeholder="Username"/>
+					</br>
+					<input class="form-control input-sm chat-input" id="password1" type="text" name="password1" placeholder="Enter a Password">
+					</br>
+					<input class="form-control input-sm chat-input" id="password2" type="text" name="password2"placeholder="Re-enter Password">
+					</br>
+					<div class="group-btn">
 		  				<input type="submit" name='login_type' value='Create'/>
 					</div>
 				</form>
 			</div>
+			<div class="col-sm-1"/>
+			</div>
+			<div class="col-sm-4 offset-sm-4">
 
-			<div class="container col-sm-4 offset-sm-4">
-				<h2> Already have an account? </h2>
+
+				<h2 class="text-center"> Already have an account? </h2>
 				{% if dict_variables.get('login_acc_error_message') != None %}
 						<p> {{dict_variables.get('login_acc_error_message')}} </p>
 				{% endif %}
+
+
 				<form action="{{url_for('login')}}" method="post">
 
-					<div class='input-group'>
-						<label for="username_login">Who are you¿</label>
-						<input id="username_login" type="text" name="user_name_login">
-					</div>
-					<div class='input-group'>
-						<label for="login_password">Enter a Password</label>
-						<input id="login_password" type="text" name="login_password">
-					</div>
+						<input class="form-control input-sm chat-input" id="username_login" type="text" name="user_name_login" placeholder="Username">
+					</br>
+						<input class="form-control input-sm chat-input" id="login_password" type="text" name="login_password" placeholder="Password">
+					</br>
 					<div class="button">
 
 		  				<input type="submit" name='login_type' value='Login'/>
 					</div>
+
 				</form>
+
 			</div>
+
 		</div>
 	{% else %}
 		<div class='container'>
 			<p> Welcome {{dict_variables.get('user')}}! Click <a href="{{url_for('entry_page')}}"> here</a> to start journaling your diet!</p>
-			<form action="{{url_for('login')}}" method="post">
 		</div>
 	{% endif %}
 
