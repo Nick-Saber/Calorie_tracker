@@ -92,8 +92,6 @@ def get_todays_entries(user):
 
 def get_past_x_days(user,x):
 	current_sesh=db_session()
-	if x > 20:
-		x=20
 	elif x< 1:
 		x=1
 	consumption=current_sesh.query(label('date',func.date(food_entries.entry_date)),label('caloric_consumption',func.sum(food_entries.caloric_value))).group_by(func.date(food_entries.entry_date)).filter(food_entries.username =='{}'.format(user)).order_by('date').limit(x)
@@ -103,4 +101,5 @@ def get_past_x_days(user,x):
 		calories.append(total.caloric_consumption)
 		dates.append(total.date)
 	return [calories,dates]
+
 	

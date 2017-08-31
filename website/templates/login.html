@@ -21,33 +21,9 @@
 		<div class ="row">
 			<div class="col-sm-2">
 			</div>
-			<div class="col-sm-4 offset-sm-4">
+			<div class="col-sm-3 offset-sm-4">
 
-				<h2 class="text-center"> Need an account? </h2>
-				{% if dict_variables.get('create_acc_error_message') != None %}
-					<p> {{dict_variables.get('create_acc_error_message')}} </p>
-				{% endif %}
-
-				<form action="{{url_for('login')}}" method="post">
-
-
-					<input class="form-control input-sm chat-input" id="username" type="text" name="user_name" placeholder="Username"/>
-					</br>
-					<input class="form-control input-sm chat-input" id="password1" type="text" name="password1" placeholder="Enter a Password">
-					</br>
-					<input class="form-control input-sm chat-input" id="password2" type="text" name="password2"placeholder="Re-enter Password">
-					</br>
-					<div class="group-btn">
-		  				<input type="submit" name='login_type' value='Create'/>
-					</div>
-				</form>
-			</div>
-			<div class="col-sm-1"/>
-			</div>
-			<div class="col-sm-4 offset-sm-4">
-
-
-				<h2 class="text-center"> Already have an account? </h2>
+				<h2 class="text-center"> Login</h2>
 				{% if dict_variables.get('login_acc_error_message') != None %}
 						<p> {{dict_variables.get('login_acc_error_message')}} </p>
 				{% endif %}
@@ -65,6 +41,32 @@
 					</div>
 
 				</form>
+
+			</div>
+			<div class="col-sm-1"/>
+			</div>
+			<div class="col-sm-3 offset-sm-4">
+
+				<h2 class="text-center"> Sign Up </h2>
+				{% if dict_variables.get('create_acc_error_message') != None %}
+					<p> {{dict_variables.get('create_acc_error_message')}} </p>
+				{% endif %}
+
+				<form action="{{url_for('login')}}" method="post">
+
+
+					<input class="form-control input-sm chat-input" id="username" type="text" name="user_name" placeholder="Username"/>
+					</br>
+					<input class="form-control input-sm chat-input" id="password1" type="text" name="password1" placeholder="Enter a Password">
+					</br>
+					<input class="form-control input-sm chat-input" id="password2" type="text" name="password2"placeholder="Re-enter Password">
+					</br>
+					<div class="group-btn">
+		  				<input type="submit" name='login_type' value='Create'/>
+					</div>
+				</form>
+
+
 
 			</div>
 

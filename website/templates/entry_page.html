@@ -50,28 +50,9 @@
 		{{  dict_variables.get('caloric_history_dates') }} -->
 
 
-
-
-
-		{% if dict_variables.get('caloric_history_values') != None %}
 		<div class="row">
-
-			<form action="{{url_for('entry_page')}}" method="post">
-				<div class="form-group col-sm-4">
-						<input class="form-control input-sm chat-input" id="entry_food_name" type="text" name="food_item" placeholder="Food items">
-						</br>
-				        <input class="form-control input-sm chat-input" type="number" id="" name="caloric_value" placeholder="Caloric Value">
-				        <br/>
-				    <div class="button">
-		  				<button type="submit">Add Entry to {{dict_variables.get('user')}}'s diet</button>
-					</div>
-				</div>
-
-			</form>
-
-
-
-			<div class="container col-sm-4">
+		{% if dict_variables.get('caloric_history_values') != None %}
+			<div class="container col-sm-7">
 				<canvas id="myChart"></canvas>
 				<script> 
 						var ctx = document.getElementById('myChart').getContext('2d');
@@ -95,10 +76,7 @@
 						});
 				 </script>
 			</div>
-
 		{% endif %}
-
-
 <!-- 
 		<div class="container col-s-2">
 			<form action="{{url_for('entry_page')}}" method="POST">
@@ -111,9 +89,23 @@
 
 			</form>
 		</div> -->
-	
 		</div>
+		<div class="row">
+			<div class="col-sm-2">
+			</div>	
+			<form action="{{url_for('entry_page')}}" method="post">
+				<div class="form-group col-sm-3">
+						<input class="form-control input-sm chat-input" id="entry_food_name" type="text" name="food_item" placeholder="Food items">
+						</br>
+				        <input class="form-control input-sm chat-input" type="number" id="" name="caloric_value" placeholder="Caloric Value">
+				        <br/>
+				    <div class="button">
+		  				<button type="submit">Add Entry to {{dict_variables.get('user')}}'s diet</button>
+					</div>
+				</div>
 
+			</form>
+		</div>
 
 
 	</body>

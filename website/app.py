@@ -11,23 +11,6 @@ secret_key = os.urandom(24)
 
 app = Flask(__name__)
 
-#SQL_alchemy stuff
-# app.config.from_pyfile('config.py')
-# db=SQL_Alchemy(app)
-
-# class entries(db.model):
-
-# 	food_name=db.Column(db.string(100))
-# 	calories=db.Column(db.Integer)
-# 	user_name=db.Column(db.string(100))
-
-# 	def __init__(self, food_name,calories,user_name):
-# 		self.food_name=food_name
-# 		self.calories=calories
-# 		self.user_name=user_name
-
-
-
 
 @app.route('/',  methods= ['GET','POST'])
 def login():
